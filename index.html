@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Geek</title>
+    <link rel="stylesheet" href="./public/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+</head>
+
+<!--------- Header text Page ---------->
+<div class="header-text">
+    <h1>Choose your pokemon</h1>
+</div>
+
+<!----------- Sound music start here -------->
+<div class="set">
+    <h class="header">Play for music</h><br><br>
+    <button class="m pokemon">Ending catch</button>
+    <button class="m pokemon">Littleroot-town</button>
+  </div>
+
+<body>
+
+    <!-------- User interaction page box  ---------->
+    <div class="pokemon-img">
+        <img src="" alt="Pokemon Sprite" id="pokemonSprite" style="display: none">
+                 </div>
+    <div class="pokemon-box">
+        <input type="text" id="pokemonName" placeholder="Enter pokemon name...">
+      <div class="button"><br>
+        <button onclick="fetchData()">Search Pokemon</button><br>
+       </div>
+    </div>
+
+    <script src="./src/index.js" charset="utf-8"></script>
+
+</body>
+
+<footer>
+    Made with ❤️ John Palaganas.
+  </footer>
+</html>

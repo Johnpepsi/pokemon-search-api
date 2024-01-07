@@ -1,0 +1,66 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Poppins:wght@200;300;400;500;600;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap');
+
+body {
+    background-image: url("./assets/pokemon-pixel-art.png");
+    position: relative;
+    justify-content: center;
+    background-size: cover;
+}
+
+/* ==== Header page === */
+.header-text {
+    font-family: "Monoton", cursive;
+    padding: 7%;
+    color: #0a2353;
+    font-size: 25px;
+    text-align: center;
+    text-shadow: 0 0 0.5em #1f7bb8;
+}
+
+/* ==== Pokemon Calling out === */
+.pokemon-img {
+    text-align: center; /* Horizontally centers the image */
+    height: 100px; /* Adjust this value as needed */
+}
+
+#pokemonSprite {
+    max-width: 100%; /* Ensures the image is responsive and fits its container */
+    height: auto; /* Maintains the image's aspect ratio */
+    display: block; /* Makes the image a block element */
+    margin: 0 auto; /* Additional styling to center the image horizontally */
+}
+
+/* ==== User text here === */
+.pokemon-box {
+    text-align: center;
+}
+
+.main-heading {
+  font-family: "Press Start 2P", cursive;
+  font-weight: 900;
+  font-size: 3.6rem;
+}
+
+/* ==== footer === */
+footer {
+  padding: 10%;
+  color: #000000;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+/* ==== Music page here === */
+.set {
+  text-align: center;
+  padding: 0%;
+}
+
+.header {
+  font-size: 25px;
+  text-shadow: 0 0 0.5em #f9f621;
+}
