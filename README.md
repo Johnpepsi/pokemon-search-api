@@ -9,3 +9,5 @@
   * I managed to make it more fun by adding Sound button so if someone were interested they can search pokemon with nostalgic sound.
   * Dom was meant to used to manipulate addEventListener to play/communicate when user is clicking the button.
   * Had to also implemented JSON to have it on response while utlizing await.
+
+![image](https://github.com/Johnpepsi/pokemon-search-api/assets/112512965/5e2ceeef-751e-474d-8197-d07fe918962f)
