@@ -1,43 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Geek</title>
-    <link rel="stylesheet" href="./public/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Geek</title>
+  <meta name="description" content="Search any Pokémon by name or Pokédex number and see its types, stats, abilities and cry.">
+  <meta name="theme-color" content="#79c8f7">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect x='4' y='1' width='8' height='14' fill='%231e2a4a'/%3E%3Crect x='1' y='4' width='14' height='8' fill='%231e2a4a'/%3E%3Crect x='2' y='2' width='12' height='6' fill='%23e8443a'/%3E%3Crect x='2' y='8' width='12' height='6' fill='%23fbfdf7'/%3E%3Crect x='2' y='7' width='12' height='2' fill='%231e2a4a'/%3E%3Crect x='6' y='6' width='4' height='4' fill='%23fbfdf7' stroke='%231e2a4a'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://pokeapi.co">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./public/style.css">
+  <script type="module" src="./src/main.js"></script>
 </head>
-
-<!--------- Header text Page ---------->
-<div class="header-text">
-    <h1>Choose your pokemon</h1>
-</div>
-
-<!----------- Sound music start here -------->
-<div class="set">
-    <h class="header">Play for music</h><br><br>
-    <button class="m pokemon">Ending catch</button>
-    <button class="m pokemon">Littleroot-town</button>
-  </div>
-
 <body>
+  <a class="skip" href="#q">Skip to search</a>
 
-    <!-------- User interaction page box  ---------->
-    <div class="pokemon-img">
-        <img src="" alt="Pokemon Sprite" id="pokemonSprite" style="display: none">
-                 </div>
-    <div class="pokemon-box">
-        <input type="text" id="pokemonName" placeholder="Enter pokemon name...">
-      <div class="button"><br>
-        <button onclick="fetchData()">Search Pokemon</button><br>
-       </div>
+  <header class="stage">
+    <div class="wrap stage__bar">
+      <a class="wordmark" href="./">Pokémon Geek</a>
+
+      <div class="music" role="group" aria-label="Background music">
+        <span class="music__eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <button class="chip-btn music__toggle" type="button" id="music-toggle" aria-pressed="false">Play music</button>
+        <label class="visually-hidden" for="music-track">Song</label>
+        <select class="chip-btn music__select" id="music-track"></select>
+        <button class="chip-btn" type="button" id="music-next">Next song</button>
+      </div>
     </div>
 
-    <script src="./src/index.js" charset="utf-8"></script>
+    <form class="wrap search" id="search" role="search" autocomplete="off">
+      <label class="search__label" for="q">Search by name or Pokédex number</label>
+      <div class="search__row">
+        <input class="pixel-box search__input" id="q" name="q" type="search" list="names"
+               placeholder="Mudkip, 258, mr. mime…" spellcheck="false" enterkeyhint="search">
+        <button class="btn btn--primary" type="submit">Search</button>
+        <button class="btn" type="button" id="random">Surprise me</button>
+      </div>
+      <datalist id="names"></datalist>
+      <p class="search__status" id="status" role="status" aria-live="polite"></p>
+    </form>
 
-</body>
+    <div class="encounter" id="encounter">
+      <div class="encounter__invite" id="invite">
+        <p>Nothing in the tall grass yet. Try one of these:</p>
+        <div class="suggestions">
+          <button class="chip-btn" type="button" data-go="treecko">Treecko</button>
+          <button class="chip-btn" type="button" data-go="torchic">Torchic</button>
+          <button class="chip-btn" type="button" data-go="mudkip">Mudkip</button>
+        </div>
+      </div>
+      <figure class="encounter__mon">
+        <img id="sprite" alt="" hidden>
+        <span class="encounter__shadow" aria-hidden="true"></span>
+      </figure>
+    </div>
+  </header>
 
-<footer>
-    Made with ❤️ John Palaganas.
+  <main class="wrap field">
+    <article class="pixel-box dex" id="dex" hidden aria-labelledby="dex-name">
+      <div class="dex__main">
+        <div class="dex__head">
+          <p class="dex__number" id="dex-number"></p>
+          <h1 class="dex__name" id="dex-name"></h1>
+          <p class="dex__genus" id="dex-genus"></p>
+          <ul class="types" id="dex-types" aria-label="Types"></ul>
+        </div>
+
+        <p class="dex__flavor" id="dex-flavor"></p>
+
+        <dl class="facts">
+          <div><dt>Height</dt><dd id="dex-height"></dd></div>
+          <div><dt>Weight</dt><dd id="dex-weight"></dd></div>
+          <div class="facts__wide"><dt>Abilities</dt><dd id="dex-abilities"></dd></div>
+        </dl>
+
+        <div class="dex__actions">
+          <button class="btn" type="button" id="cry">Play cry</button>
+          <button class="btn" type="button" id="shiny" aria-pressed="false">Show shiny</button>
+        </div>
+      </div>
+
+      <section class="stats" aria-labelledby="stats-title">
+        <h2 class="stats__title" id="stats-title">Base stats</h2>
+        <dl class="stats__list" id="dex-stats"></dl>
+        <p class="stats__total">Total <strong id="dex-total"></strong></p>
+      </section>
+
+      <nav class="dex__nav" aria-label="Browse the Pokédex">
+        <button class="btn btn--ghost" type="button" id="prev">Previous <span id="prev-label"></span></button>
+        <button class="btn btn--ghost" type="button" id="next">Next <span id="next-label"></span></button>
+      </nav>
+    </article>
+
+    <section class="recent" id="recent" hidden aria-labelledby="recent-title">
+      <h2 class="recent__title" id="recent-title">Recently seen</h2>
+      <ul class="recent__list" id="recent-list"></ul>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p>Made with ❤️ by John Palaganas. Data from <a href="https://pokeapi.co/">PokéAPI</a>.</p>
+    <p class="footer__small">A fan project. Pokémon and Pokémon character names are trademarks of Nintendo.
+      Press <kbd>/</kbd> to search, <kbd>←</kbd> <kbd>→</kbd> to browse.</p>
   </footer>
+</body>
 </html>
